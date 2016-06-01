@@ -1,6 +1,6 @@
 # CronApi
 
-[![CircleCI](https://circleci.com/gh/rafaeljesus/cron_api.svg?style=svg)](https://circleci.com/gh/rafaeljesus/cron_api)
+[![CircleCI](https://circleci.com/gh/rafaeljesus/cron_api.svg?style=svg)](https://circleci.com/gh/rafaeljesus/cron-api)
 
 * Cron-like job scheduler as a service
 
