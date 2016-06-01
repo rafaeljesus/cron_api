@@ -1,0 +1,22 @@
+version: '2'
+services:
+  api:
+    build: .
+    environment:
+      NODE_ENV: "development"
+      MONGO_PORT_27017_TCP_ADDR: "0.0.0.0"
+    command: iex -S mix
+    ports:
+    - "3000:3000"
+    volumes:
+    - .:/cron_api
+    - .:/cron_api/deps
+    links:
+    - db
+  db:
+    image: mongo
+    ports:
+    - "27017:27017"
+    volumes:
+    - /data/db2/:/data/db/
+    command: /usr/bin/mongod --smallfiles
