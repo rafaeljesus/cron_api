@@ -1,0 +1,13 @@
+%{"connection": {:hex, :connection, "1.0.2", "f4a06dd3ecae4141aa66f94ce92ea4c4b8753069472814932f1cadbc3078ab80", [:mix], []},
+  "cors_plug": {:hex, :cors_plug, "1.1.2", "3e7451286996f745c7b629c39d24a6493e59b0c8191f27e67f6ab097f96ffd23", [:mix], [{:plug, "> 0.8.0", [hex: :plug, optional: false]}, {:cowboy, "~> 1.0.0", [hex: :cowboy, optional: false]}]},
+  "cowboy": {:hex, :cowboy, "1.0.4", "a324a8df9f2316c833a470d918aaf73ae894278b8aa6226ce7a9bf699388f878", [:rebar, :make], [{:cowlib, "~> 1.0.0", [hex: :cowlib, optional: false]}, {:ranch, "~> 1.0", [hex: :ranch, optional: false]}]},
+  "cowlib": {:hex, :cowlib, "1.0.2", "9d769a1d062c9c3ac753096f868ca121e2730b9a377de23dec0f7e08b1df84ee", [:make], []},
+  "decimal": {:hex, :decimal, "1.1.2", "79a769d4657b2d537b51ef3c02d29ab7141d2b486b516c109642d453ee08e00c", [:mix], []},
+  "ecto": {:hex, :ecto, "1.0.7", "d8deca5d5a03e7c9ed4821e6f1f85dad736aca960785f154e3a8c1bee1aeaa13", [:mix], [{:sbroker, "~> 0.7", [hex: :sbroker, optional: true]}, {:postgrex, "~> 0.9.1", [hex: :postgrex, optional: true]}, {:poolboy, "~> 1.4", [hex: :poolboy, optional: false]}, {:poison, "~> 1.0", [hex: :poison, optional: true]}, {:mariaex, "~> 0.4.1", [hex: :mariaex, optional: true]}, {:decimal, "~> 1.0", [hex: :decimal, optional: false]}]},
+  "maru": {:hex, :maru, "0.9.6", "e94b24201ebdd913400f9c279d5b1816aa4d2f75adafe2062bc10bf4c55e4b7a", [:mix], [{:poison, "~> 1.5 or ~> 2.0", [hex: :poison, optional: false]}, {:plug, "~> 1.0", [hex: :plug, optional: false]}, {:cowboy, "~> 1.0", [hex: :cowboy, optional: false]}]},
+  "mongodb": {:hex, :mongodb, "0.1.1", "8737d8f57466b4171f8216f76aa1ab3855d55220b19a1a248fedc96c9f50c274", [:mix], [{:poolboy, "~> 1.5", [hex: :poolboy, optional: true]}, {:connection, "~> 1.0", [hex: :connection, optional: false]}]},
+  "mongodb_ecto": {:hex, :mongodb_ecto, "0.1.4", "d8eebaed05851802b0e7cd53dcfbb4b62a5819e8acd7c584b8eaa3c8ead43c2c", [:mix], [{:mongodb, "~> 0.1", [hex: :mongodb, optional: false]}, {:ecto, "~> 1.0.0", [hex: :ecto, optional: false]}]},
+  "plug": {:hex, :plug, "1.1.5", "de5645c18170415a72b18cc3d215c05321ddecac27a15acb923742156e98278b", [:mix], [{:cowboy, "~> 1.0", [hex: :cowboy, optional: true]}]},
+  "poison": {:hex, :poison, "2.1.0", "f583218ced822675e484648fa26c933d621373f01c6c76bd00005d7bd4b82e27", [:mix], []},
+  "poolboy": {:hex, :poolboy, "1.5.1", "6b46163901cfd0a1b43d692657ed9d7e599853b3b21b95ae5ae0a777cf9b6ca8", [:rebar], []},
+  "ranch": {:hex, :ranch, "1.2.1", "a6fb992c10f2187b46ffd17ce398ddf8a54f691b81768f9ef5f461ea7e28c762", [:make], []}}

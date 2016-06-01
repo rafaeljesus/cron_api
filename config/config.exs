@@ -28,3 +28,13 @@ use Mix.Config
 # here (which is why it is important to import them last).
 #
 #     import_config "#{Mix.env}.exs"
+
+config :maru, Cron.API,
+  versioning: [
+    using: :path
+  ],
+  http: [port: 3000]
+
+config :cron, Cron.Repo,
+  database: "cron",
+  hostname: "localhost"
