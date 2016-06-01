@@ -22,7 +22,12 @@ defmodule Cron.Event do
     |> Repo.insert
   end
 
-  def changeset(event, params \\ :empty) do
+  def update(event, params) do
+    changeset(event, params)
+    |> Repo.update
+  end
+
+  defp changeset(event, params \\ :empty) do
     event
     |> cast(params, @required_fields, @optional_fields)
   end
