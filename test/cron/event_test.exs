@@ -1,29 +1,21 @@
 defmodule Cron.EventTest do
   use ExUnit.Case
-  alias Cron.{Repo, Event}
+  alias Cron.{Event}
 
-  @body %{
+  @invalid_attrs %{}
+  @valid_attrs %{
     url: "https://api.github.com/users/rafaeljesus/events",
     cron: "* * * * *",
     status: "active"
   }
 
-  setup do
-    on_exit fn ->
-      Repo.delete_all(Event)
-    end
+  test "changeset with valid attributes" do
+    changeset = Event.changeset(%Event{}, @valid_attrs)
+    assert changeset.valid?
   end
 
-  test "should create event job" do
-    case Event.create(@body) do
-      {:ok, model} -> assert model.cron == @body[:cron]
-    end
-  end
-
-  test "should update event job" do
-    inactive = 'inactive'
-    with {:ok, model} <- Event.create(@body),
-      {:ok, model} <- Event.update(model, Map.merge(@body, %{status: inactive})),
-      do: assert inactive == model.status
+  test "changeset with invalid attributes" do
+    changeset = Event.changeset(%Event{}, @invalid_attrs)
+    refute changeset.valid?
   end
 end

@@ -1,8 +1,5 @@
 defmodule Cron.Router.Index do
   use Maru.Router
-
-  import Ecto.Query
-
   alias Cron.{Repo, Event}
 
   version "v1"
@@ -14,7 +11,8 @@ defmodule Cron.Router.Index do
       optional :status, type: String
     end
     post do
-      case Event.create(params) do
+      changeset = Event.changeset(%Event{}, params)
+      case Repo.insert(changeset) do
         {:ok, event} -> json conn, event
         {:error, _changeset} ->
           conn
@@ -25,7 +23,7 @@ defmodule Cron.Router.Index do
 
     route_param :id do
       get do
-        event = Event.get(params[:id])
+        event = Repo.get!(Event, params[:id])
         json conn, event
       end
 
@@ -36,9 +34,15 @@ defmodule Cron.Router.Index do
         at_least_one_of [:url, :cron, :status]
       end
       patch do
-        with {:ok, event} <- Event.get(params[:task_id]),
-          {:ok, event} <- Event.update(event, params),
-          do: json conn, event
+        event = Event |> Repo.get(params[:id])
+        changeset = Event.changeset(event, params)
+        case Repo.update(changeset) do
+        {:ok, event} -> json conn, event
+        {:error, _changeset} ->
+          conn
+          |> put_status(422)
+          |> text("Uprocessable Entity")
+        end
       end
     end
   end

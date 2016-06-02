@@ -1,10 +1,6 @@
 defmodule Cron.Event do
   use Ecto.Schema
-
-  import Ecto.Query
   import Ecto.Changeset
-
-  alias Cron.Repo
 
   @required_fields ~w(url cron)
   @optional_fields ~w(status)
@@ -17,17 +13,7 @@ defmodule Cron.Event do
     field :status
   end
 
-  def create(params) do
-    changeset(%__MODULE__{}, params)
-    |> Repo.insert
-  end
-
-  def update(event, params) do
-    changeset(event, params)
-    |> Repo.update
-  end
-
-  defp changeset(event, params \\ :empty) do
+  def changeset(event, params \\ :empty) do
     event
     |> cast(params, @required_fields, @optional_fields)
   end
