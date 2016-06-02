@@ -1,6 +1,6 @@
 defmodule Cron.Router.Index do
   use Maru.Router
-  alias Cron.{Repo, Event}
+  alias Cron.{Repo, Event}, warn: false
 
   version "v1"
 
@@ -42,6 +42,17 @@ defmodule Cron.Router.Index do
           conn
           |> put_status(422)
           |> text("Uprocessable Entity")
+        end
+      end
+
+      delete do
+        event = Event |> Repo.get(params[:id])
+        case Repo.delete(event) do
+          {:ok, event} -> json conn, event
+          _ ->
+            conn
+            |> put_status(412)
+            |> text("Precondition Failed")
         end
       end
     end

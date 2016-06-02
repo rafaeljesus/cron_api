@@ -44,4 +44,11 @@ defmodule Cron.RouterTest do
     |> make_response
     assert conn.status == 200
   end
+
+  test "DELETE /v1/events/:id", %{model: model} do
+    conn = conn(:delete, "/v1/events/#{model.id}")
+    |> put_req_header("content-type", "application/json")
+    |> make_response
+    assert conn.status == 200
+  end
 end
