@@ -1,10 +1,16 @@
 defmodule Cron.Router.Index do
   use Maru.Router
-  alias Cron.{Repo, Event}, warn: false
+  alias Cron.{Repo, Search, Event}, warn: false
 
   version "v1"
 
   namespace :events do
+    get do
+      cron = fetch_query_params(conn)
+      events = Search.new(cron.params)
+      json conn, events
+    end
+
     params do
       requires :url, type: String
       requires :cron, type: String
