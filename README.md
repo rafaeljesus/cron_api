@@ -4,6 +4,13 @@
 
 * Cron-like job scheduler as a service
 
+## Deploying to Docker Hub
+  This project deploys the built image to Docker Hub after successfully building and testing. See the `deployment` section of [circle.yml](circle.yml) for details on how this is done. Note that three environment variables need to be set on CircleCI for the deployment to work:
+
+  * DOCKER_EMAIL - The email address associated with the user with push access to the Docker Hub repository
+  * DOCKER_USER - Docker Hub username
+  * DOCKER_PASS - Docker Hub password (these are all stored encrypted on CircleCI, and you can create a deployment user with limited permission on Docker Hub if you like)
+
 ## Installation
 ```bash
 git clone https://github.com/rafaeljesus/cron_api.git
