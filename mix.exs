@@ -16,7 +16,7 @@ defmodule Cron.Mixfile do
   #
   # Type "mix help compile.app" for more information
   def application do
-    [applications: [:logger, :maru, :ecto, :mongodb_ecto],
+    [applications: [:logger, :maru, :ecto, :mongodb_ecto, :quantum],
       mod: {Cron, []}
     ]
   end
@@ -36,7 +36,8 @@ defmodule Cron.Mixfile do
       {:poison, "~> 2.0", override: true},
       {:cors_plug, "~> 1.1.1"},
       {:ecto, "~> 1.0.7", override: true},
-      {:mongodb_ecto, "~> 0.1.4"}
+      {:mongodb_ecto, "~> 0.1.4"},
+      {:quantum, ">= 1.7.1"}
     ]
   end
 

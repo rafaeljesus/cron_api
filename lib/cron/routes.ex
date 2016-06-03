@@ -1,6 +1,7 @@
 defmodule Cron.Router.Index do
   use Maru.Router
-  alias Cron.{Repo, Search, Event}, warn: false
+  alias Quantum, warn: false
+  alias Cron.{Repo, Search, Event, Scheduler}, warn: false
 
   version "v1"
 
@@ -17,14 +18,11 @@ defmodule Cron.Router.Index do
       optional :status, type: String
     end
     post do
-      changeset = Event.changeset(%Event{}, params)
-      case Repo.insert(changeset) do
-        {:ok, event} -> json conn, event
-        {:error, _changeset} ->
-          conn
-          |> put_status(422)
-          |> text("Uprocessable Entity")
-      end
+      result = with changeset <- Event.changeset(%Event{}, params),
+        {:ok, event} <- Repo.insert(changeset),
+        do: {:ok, event}
+
+      wrap conn, result
     end
 
     route_param :id do
@@ -40,26 +38,33 @@ defmodule Cron.Router.Index do
         at_least_one_of [:url, :cron, :status]
       end
       patch do
-        event = Event |> Repo.get(params[:id])
-        changeset = Event.changeset(event, params)
-        case Repo.update(changeset) do
-        {:ok, event} -> json conn, event
-        {:error, _changeset} ->
-          conn
-          |> put_status(422)
-          |> text("Uprocessable Entity")
-        end
+        result = with event <- Event |> Repo.get(params[:id]),
+          changeset <- Event.changeset(event, params),
+          {:ok, event} <- Repo.update(changeset),
+          do: {:ok, event}
+
+        wrap conn, result
       end
 
       delete do
-        event = Event |> Repo.get(params[:id])
-        case Repo.delete(event) do
+        result = with event <- Event |> Repo.get(params[:id]),
+          {:ok, event} <- Repo.delete(event),
+          do: {:ok, event}
+
+        wrap conn, result
+      end
+
+      defp wrap(conn, result) do
+        case result do
           {:ok, event} -> json conn, event
-          _ ->
-            conn
-            |> put_status(412)
-            |> text("Precondition Failed")
+          {:error, _changeset} -> boom conn, _changeset
         end
+      end
+
+      defp boom(conn, _changeset) do
+        conn
+        |> put_status(422)
+        |> text("Uprocessable Entity")
       end
     end
   end
