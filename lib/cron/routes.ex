@@ -22,7 +22,7 @@ defmodule Cron.Router.Index do
         {:ok, _} <- Scheduler.add(event),
         do: {:ok, event}
 
-      wrap conn, result
+      reply conn, result
     end
 
     route_param :id do
@@ -45,7 +45,7 @@ defmodule Cron.Router.Index do
           {:ok, _} <- Scheduler.add(event),
           do: {:ok, event}
 
-        wrap conn, result
+        reply conn, result
       end
 
       delete do
@@ -54,15 +54,11 @@ defmodule Cron.Router.Index do
           {:ok, _} <- Scheduler.delete(event.id),
           do: {:ok, event}
 
-        wrap conn, result
+        reply conn, result
       end
 
-      defp wrap(conn, result) do
-        case result do
-          {:ok, event} -> json conn, event
-          {:error, _changeset} -> boom conn, _changeset
-        end
-      end
+      defp reply(conn, {:ok, event}), do: json conn, event
+      defp reply(conn, {:error, _changeset}), do: boom conn, _changeset
 
       defp boom(conn, _changeset) do
         conn
