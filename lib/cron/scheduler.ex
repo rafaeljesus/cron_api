@@ -1,10 +1,11 @@
 defmodule Cron.Scheduler do
   alias Quantum
+  alias Cron.Request
 
   def add(event) do
     job = %Quantum.Job{
       schedule: event.cron,
-      task: fn -> IO.puts "tick" end
+      task: fn -> Request.call(event.url) end
     }
     job_id = encode_id(event.id)
     Quantum.add_job(job_id, job)
