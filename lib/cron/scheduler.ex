@@ -13,7 +13,8 @@ defmodule Cron.Scheduler do
 
   def find(id) do
     job_id = encode_id(id)
-    Quantum.find_job(job_id)
+    job = Quantum.find_job(job_id)
+    {:ok, job}
   end
 
   defp encode_id(id), do: String.to_atom("event_" <> Integer.to_string(id))

@@ -12,6 +12,6 @@ defmodule Cron.SearchTest do
     with event <- %Event{id: 1, cron: '* * * * *'},
       {:ok, job_id} <- Scheduler.add(event),
       {:ok, job} <- Scheduler.find(event.id),
-      do: assert job.state == 'active'
+      do: assert job.state == :active
   end
 end
