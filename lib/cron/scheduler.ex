@@ -35,5 +35,5 @@ defmodule Cron.Scheduler do
     {:ok, job}
   end
 
-  defp encode_id(id), do: String.to_atom("event_" <> Integer.to_string(id))
+  defp encode_id(id), do: String.to_atom("event_" <> id)
 end

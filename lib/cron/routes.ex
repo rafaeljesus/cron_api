@@ -19,6 +19,7 @@ defmodule Cron.Router.Index do
     post do
       result = with changeset <- Event.changeset(%Event{}, params),
         {:ok, event} <- Repo.insert(changeset),
+        {:ok, _} <- Scheduler.add(event),
         do: {:ok, event}
 
       wrap conn, result
@@ -40,6 +41,8 @@ defmodule Cron.Router.Index do
         result = with event <- Event |> Repo.get(params[:id]),
           changeset <- Event.changeset(event, params),
           {:ok, event} <- Repo.update(changeset),
+          {:ok, _} <- Scheduler.delete(event.id),
+          {:ok, _} <- Scheduler.add(event),
           do: {:ok, event}
 
         wrap conn, result
@@ -48,6 +51,7 @@ defmodule Cron.Router.Index do
       delete do
         result = with event <- Event |> Repo.get(params[:id]),
           {:ok, event} <- Repo.delete(event),
+          {:ok, _} <- Scheduler.delete(event.id),
           do: {:ok, event}
 
         wrap conn, result
