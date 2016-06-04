@@ -1,6 +1,5 @@
 defmodule Cron.Router.Index do
   use Maru.Router
-  alias Quantum, warn: false
   alias Cron.{Repo, Search, Event, Scheduler}, warn: false
 
   version "v1"
