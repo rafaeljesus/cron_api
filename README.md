@@ -18,13 +18,35 @@ iex -S mix
 ```
 
 ## API Documentation
-### create cron job
+### create
 ```bash
 curl -X POST 'http://localhost:3000/v1/events' \
  -d 'url=https://api.your-server.com/your-url' \
  -d 'cron=* * * * *' \
  -d 'status=active'
- ```
+```
+ 
+### update
+```bash
+curl -X PATCH 'http://localhost:3000/v1/events/1' \
+ -d 'cron=1 * * * *' \
+ -d 'status=inactive'
+```
+ 
+### show
+```bash
+curl -X GET 'http://localhost:3000/v1/events/1'
+```
+
+### delete
+```bash
+curl -X DELETE 'http://localhost:3000/v1/events/1'
+```
+
+### search
+```bash
+curl -X GET 'http://localhost:3000/v1/events/?status=active&page=2&page_size=25'
+```
 
 ## Built with
 - [elixir](http://elixir-lang.org) Backend is a elixir 1.2.
