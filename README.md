@@ -17,8 +17,14 @@ To start the serve execute:
 iex -S mix
 ```
 
-## Create a Event
-TODO
+## API Documentation
+### create cron job
+```bash
+curl -X POST 'http://localhost:3000/v1/events' \
+ -d 'url=https://api.your-server.com/your-url' \
+ -d 'cron=* * * * *' \
+ -d 'status=active'
+ ```
 
 ## Built with
 - [elixir](http://elixir-lang.org) Backend is a elixir 1.2.
