@@ -1,6 +1,7 @@
 # CronApi
 
 [![CircleCI](https://circleci.com/gh/rafaeljesus/cron_api.svg?style=svg)](https://circleci.com/gh/rafaeljesus/cron_api)
+[![Deps Status](https://beta.hexfaktor.org/badge/all/github/edgurgel/poxa.svg)](https://beta.hexfaktor.org/github/rafaeljesus/cron_api)
 
 * Cron-like job scheduler as a service
 * A minimal docker alpine container
