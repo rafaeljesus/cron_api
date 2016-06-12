@@ -1,5 +1,6 @@
 /_build
 /cover
 /deps
+/rel/cron
 erl_crash.dump
 *.ez
