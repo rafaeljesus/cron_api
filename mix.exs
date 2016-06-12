@@ -16,7 +16,7 @@ defmodule Cron.Mixfile do
   #
   # Type "mix help compile.app" for more information
   def application do
-    [applications: [:logger, :maru, :ecto, :mongodb_ecto, :quantum, :httpoison],
+    [applications: [:logger, :maru, :ecto, :mongodb_ecto, :httpoison, :quantum],
       mod: {Cron, []}
     ]
   end

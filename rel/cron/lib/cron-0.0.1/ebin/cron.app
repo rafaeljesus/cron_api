@@ -1,0 +1,13 @@
+{application,cron,
+             [{registered,[]},
+              {description,"Cron-like job scheduler as a service\n"},
+              {vsn,"0.0.1"},
+              {modules,['Elixir.Cron','Elixir.Cron.API','Elixir.Cron.Event',
+                        'Elixir.Cron.Paginator','Elixir.Cron.Repo',
+                        'Elixir.Cron.Repo.Pool','Elixir.Cron.Request',
+                        'Elixir.Cron.Router.Index','Elixir.Cron.Scheduler',
+                        'Elixir.Cron.Search','Elixir.Cron.Supervisor',
+                        'Elixir.Poison.Encoder.Cron.Event']},
+              {applications,[kernel,stdlib,elixir,logger,maru,ecto,
+                             mongodb_ecto,httpoison,quantum]},
+              {mod,{'Elixir.Cron',[]}}]}.
