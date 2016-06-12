@@ -37,6 +37,7 @@ defmodule Cron.Mixfile do
       {:cors_plug, "~> 1.1.1"},
       {:ecto, "~> 1.0.7", override: true},
       {:mongodb_ecto, "~> 0.1.4"},
+      {:exrm, "~> 1.0.5"},
       {:quantum, ">= 1.7.1"},
       {:httpoison, "~> 0.8.0"}
     ]

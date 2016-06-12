@@ -3,7 +3,6 @@ services:
   api:
     build: .
     environment:
-      NODE_ENV: "development"
       MONGO_PORT_27017_TCP_ADDR: "0.0.0.0"
     command: iex -S mix
     ports:
