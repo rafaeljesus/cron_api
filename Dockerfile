@@ -1,6 +1,6 @@
 FROM aweiker/alpine-elixir
 
-ENV APP_NAME cron_api
+ENV APP_NAME cron
 
 COPY . /source
 WORKDIR /source
