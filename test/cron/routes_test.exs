@@ -1,7 +1,9 @@
-defmodule Cron.RouterTest do
+defmodule Cron.Routes.EventTest do
   use ExUnit.Case
   use Maru.Test, for: Cron.API
-  alias Cron.{Repo, Event}
+
+  alias Cron.Repo
+  alias Cron.Models.Event
 
   @valid_attrs %{
     url: "https://api.github.com/users/rafaeljesus/events",
@@ -10,8 +12,9 @@ defmodule Cron.RouterTest do
   }
 
   setup do
-    changeset = Event.changeset(%Event{}, @valid_attrs)
-    {:ok, model} = Repo.insert(changeset)
+    model = %Event{}
+    |> Event.changeset(@valid_attrs)
+    |> Repo.insert!
 
     on_exit fn ->
       Repo.delete_all(Event)

@@ -1,4 +1,4 @@
-defmodule Cron.Request do
+defmodule Cron.Services.Request do
   def call(url) do
     url
     |> HTTPoison.get

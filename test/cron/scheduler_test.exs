@@ -1,50 +1,32 @@
-defmodule Cron.SchedulerTest do
+defmodule Cron.Services.SchedulerTest do
   use ExUnit.Case
-  alias Cron.{Scheduler, Event}
 
-  @id "5752493776f779e09ddfda82"
+  alias Cron.Models.Event
+  alias Cron.Services.Scheduler
+
+  @id 1
   @cron "* * * * *"
 
   setup do
-    on_exit fn ->
-      Scheduler.delete(@id)
-    end
+    on_exit fn -> Scheduler.delete(@id) end
+    event = %Event{id: @id, cron: @cron}
+    {:ok, %{event: event}}
   end
 
-  test "should add job" do
-    with event <- %Event{id: @id, cron: @cron},
-      {:ok, job_id} <- Scheduler.add(event),
-      do: assert job_id != nil
+  test "creates an job", %{event: event} do
+    job_id = Scheduler.create(event)
+    assert job_id != nil
   end
 
-  test "should find job" do
-    with event <- %Event{id: @id, cron: @cron},
-      {:ok, _} <- Scheduler.add(event),
-      {:ok, job} <- Scheduler.find(event.id),
-      do: assert job.state == :active
+  test "finds an job", %{event: event} do
+    Scheduler.create(event)
+    job = Scheduler.find(event.id)
+    assert job.state == :active
   end
 
-  test "should deactivate job" do
-    with event <- %Event{id: @id, cron: @cron},
-      {:ok, _} <- Scheduler.add(event),
-      {:ok, _} <- Scheduler.deactivate(event.id),
-      {:ok, job} <- Scheduler.find(event.id),
-      do: assert job.state == :inactive
-  end
-
-  test "should activate job" do
-    with event <- %Event{id: @id, cron: @cron},
-      {:ok, _} <- Scheduler.add(event),
-      {:ok, _} <- Scheduler.activate(event.id),
-      {:ok, job} <- Scheduler.find(event.id),
-      do: assert job.state == :active
-  end
-
-  test "should delete job" do
-    with event <- %Event{id: @id, cron: @cron},
-      {:ok, _} <- Scheduler.add(event),
-      {:ok, _} <- Scheduler.delete(event.id),
-      {:ok, job} <- Scheduler.find(event.id),
-      do: assert job == nil
+  test "deletes an job", %{event: event} do
+    Scheduler.delete(event.id)
+    job = Scheduler.find(event.id)
+    assert job == nil
   end
 end

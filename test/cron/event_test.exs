@@ -1,6 +1,7 @@
-defmodule Cron.EventTest do
+defmodule Cron.Models.EventTest do
   use ExUnit.Case
-  alias Cron.{Event}
+
+  alias Cron.Models.Event
 
   @invalid_attrs %{}
   @valid_attrs %{

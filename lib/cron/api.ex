@@ -3,14 +3,18 @@ defmodule Cron.API do
 
   plug CORSPlug
   plug Plug.Logger
-  plug Plug.Parsers, parsers: [:json], json_decoder: Poison
+  plug Plug.Parsers,
+    pass: ["*/*"],
+    parsers: [:json],
+    json_decoder: Poison
 
-  mount Cron.Router.Index
+  mount Cron.Routes.Healthz
+  mount Cron.Routes.Event
 
   rescue_from :all, as: e do
     IO.inspect(e)
     conn
     |> put_status(500)
-    |> text("Server Error")
+    |> json(%{message: "Server Error"})
   end
 end
